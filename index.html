@@ -3,69 +3,239 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="城市新手养宠七日饲养核对：喂水喂粮清洁牵绳与文明养宠提醒。非诊疗、不开药、不卖宠物药粮。" />
 <title>养宠第一周，先勾这几项</title>
 <style>
-  :root { --ink:#1a2e1f; --line:#c9d6cc; --bg:#f4f7f4; --card:#fff; --acc:#2f6b45; --warn:#8a5a2b; }
+  :root {
+    --ink:#1a2e1f; --line:#c9d6cc; --bg:#f4f7f4; --card:#fff;
+    --acc:#2f6b45; --warn:#8a5a2b; --muted:#5b7263; --soft:#e8f0ea;
+  }
   * { box-sizing: border-box; }
-  body { margin:0; font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink); background:linear-gradient(180deg,#eef5ef,#f7f4ef 40%,#f4f7f4); }
-  main { max-width:720px; margin:0 auto; padding:20px 16px 48px; }
+  body {
+    margin:0;
+    font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,#eef5ef,#f7f4ef 40%,#f4f7f4);
+  }
+  main { max-width:720px; margin:0 auto; padding:20px 16px 56px; }
   h1 { font-size:1.55rem; line-height:1.35; margin:0 0 8px; }
-  .sub { color:#45604c; margin:0 0 16px; line-height:1.55; }
-  .bound { background:#fff8ef; border:1px solid #e6d2b5; border-radius:10px; padding:12px 14px; margin:0 0 18px; font-size:.92rem; line-height:1.55; }
+  .sub { color:#45604c; margin:0 0 14px; line-height:1.55; }
+  .bound {
+    background:#fff8ef; border:1px solid #e6d2b5; border-radius:10px;
+    padding:12px 14px; margin:0 0 14px; font-size:.92rem; line-height:1.55;
+  }
   .bound strong { color:var(--warn); }
-  section { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:0 0 14px; }
+  .bound ul { margin:8px 0 0; padding-left:18px; }
+  nav.jump {
+    display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px;
+  }
+  nav.jump a {
+    font-size:.85rem; text-decoration:none; color:var(--acc);
+    background:var(--soft); border:1px solid var(--line);
+    border-radius:999px; padding:6px 12px;
+  }
+  section {
+    background:var(--card); border:1px solid var(--line);
+    border-radius:12px; padding:14px 16px; margin:0 0 14px;
+  }
   section h2 { font-size:1.05rem; margin:0 0 10px; }
-  label.item { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px dashed #e2ebe4; font-size:.95rem; line-height:1.45; }
+  section h3 { font-size:.95rem; margin:14px 0 8px; color:#2a4a34; }
+  label.item {
+    display:flex; gap:10px; align-items:flex-start;
+    padding:8px 0; border-bottom:1px dashed #e2ebe4;
+    font-size:.95rem; line-height:1.45;
+  }
   label.item:last-child { border-bottom:0; }
-  input[type=checkbox] { margin-top:3px; width:18px; height:18px; }
+  label.item .tip { display:block; font-size:.8rem; color:var(--muted); margin-top:2px; }
+  input[type=checkbox] { margin-top:3px; width:18px; height:18px; flex-shrink:0; }
   .row { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
   input, select, textarea, button { font:inherit; }
-  input[type=text], input[type=tel], select, textarea {
-    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:#fff;
+  input[type=text], input[type=tel], input[type=date], select, textarea {
+    width:100%; padding:10px 12px; border:1px solid var(--line);
+    border-radius:8px; background:#fff;
   }
   button {
-    background:var(--acc); color:#fff; border:0; border-radius:8px; padding:11px 16px; cursor:pointer; font-weight:600;
+    background:var(--acc); color:#fff; border:0; border-radius:8px;
+    padding:11px 16px; cursor:pointer; font-weight:600;
   }
   button.secondary { background:#5a7462; }
-  .hint { font-size:.85rem; color:#5b7263; margin-top:8px; line-height:1.45; }
+  button.ghost {
+    background:transparent; color:var(--acc); border:1px solid var(--line); font-weight:500;
+  }
+  button:disabled { opacity:.55; cursor:not-allowed; }
+  .hint { font-size:.85rem; color:var(--muted); margin-top:8px; line-height:1.45; }
   .ok { color:#1f6b3a; font-size:.9rem; margin-top:8px; }
   .err { color:#a33; font-size:.9rem; margin-top:8px; }
-  ul.list { margin:8px 0 0; padding-left:18px; }
-  footer { margin-top:22px; font-size:.82rem; color:#5b7263; line-height:1.5; }
+  ul.list, ol.steps { margin:8px 0 0; padding-left:18px; line-height:1.55; }
+  .progress-wrap { margin:0 0 12px; }
+  .progress-meta {
+    display:flex; justify-content:space-between; font-size:.85rem;
+    color:var(--muted); margin-bottom:6px;
+  }
+  .bar {
+    height:10px; background:#e2ebe4; border-radius:999px; overflow:hidden;
+  }
+  .bar > i {
+    display:block; height:100%; width:0; background:var(--acc);
+    transition:width .2s ease;
+  }
+  .week {
+    display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:10px;
+  }
+  .week button.day {
+    padding:8px 0; border-radius:8px; border:1px solid var(--line);
+    background:#f7faf7; color:var(--ink); font-weight:500; font-size:.8rem;
+  }
+  .week button.day.done { background:#d7eadc; border-color:#9fc3a8; }
+  .week button.day.today { outline:2px solid var(--acc); outline-offset:1px; }
+  .myth {
+    border-left:3px solid var(--acc); padding:8px 0 8px 12px;
+    margin:0 0 10px; font-size:.92rem; line-height:1.5;
+  }
+  .myth strong { display:block; margin-bottom:2px; }
+  .faq details {
+    border-top:1px dashed #e2ebe4; padding:10px 0;
+  }
+  .faq details:first-of-type { border-top:0; }
+  .faq summary { cursor:pointer; font-weight:600; }
+  .faq p { margin:8px 0 0; font-size:.92rem; line-height:1.55; color:#334a39; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .chips span {
+    font-size:.8rem; background:var(--soft); border:1px solid var(--line);
+    border-radius:999px; padding:4px 10px; color:#34553f;
+  }
+  footer { margin-top:22px; font-size:.82rem; color:var(--muted); line-height:1.5; }
   a { color:var(--acc); }
+  @media (max-width:420px) {
+    .week { gap:4px; }
+    .week button.day { font-size:.72rem; padding:7px 0; }
+  }
 </style>
 </head>
 <body>
 <main>
   <h1>养宠第一周，先勾这几项</h1>
   <p class="sub">给城市新手养宠人用的七日饲养核对单：把喂水、喂粮、清洁、出门牵绳和文明养宠几件事勾清楚。对照公开科普，不做诊断、不开药、不卖宠物药粮。</p>
-  <div class="bound"><strong>边界：</strong>本页只做饲养科普核对与文明养宠提醒。生病请就医；不在此开药、不做疾病诊断、不售卖兽药或饲料套餐。</div>
 
-  <section>
-    <h2>为什么先做这一页</h2>
+  <div class="bound">
+    <strong>边界（请先看完）：</strong>
     <ul>
+      <li>本页只做饲养科普核对与文明养宠提醒。</li>
+      <li>出现精神差、不吃、呕吐、流血、呼吸急促等异常，请及时就医，不要在此「对症」。</li>
+      <li>不在此开药、不做疾病诊断、不售卖兽药或饲料套餐。</li>
+    </ul>
+  </div>
+
+  <nav class="jump" aria-label="页面跳转">
+    <a href="#why">为什么</a>
+    <a href="#steps">三步</a>
+    <a href="#myths">常见误区</a>
+    <a href="#civil">文明养宠</a>
+    <a href="#check">今日五项</a>
+    <a href="#week">七日进度</a>
+    <a href="#book">预约试填</a>
+    <a href="#faq">常见问</a>
+    <a href="#local">本机记录</a>
+  </nav>
+
+  <section id="why">
+    <h2>为什么先做这一页</h2>
+    <ul class="list">
       <li>新手养宠知识来源杂，短视频真假混杂，容易踩喂养误区。</li>
       <li>刚养上第一周最忙，口头记住的事项容易漏。</li>
       <li>需要一页能勾选的清单，而不是诊疗或卖药页面。</li>
     </ul>
+    <div class="chips" aria-label="适合谁">
+      <span>刚到家第一周</span>
+      <span>城市公寓养宠</span>
+      <span>家里一起养的人</span>
+      <span>想先核对、不看病开药</span>
+    </div>
   </section>
 
-  <section>
+  <section id="steps">
     <h2>三步用法</h2>
-    <ol>
-      <li>勾完「今日五项」并保存到本机。</li>
-      <li>写一句当天观察（精神/食欲，非诊断）。</li>
-      <li>愿意试填两周可留下称呼和手机。</li>
+    <ol class="steps">
+      <li>勾完「今日五项」并保存到本机（可顺便写一句观察）。</li>
+      <li>在「七日进度」里看本周哪几天已经记过。</li>
+      <li>愿意试填两周可留下称呼和手机，周末联系。</li>
     </ol>
+    <p class="hint">数据只存在你当前浏览器的本机存储里，不会上传到服务器。</p>
+  </section>
+
+  <section id="myths">
+    <h2>新手常踩的饲养误区（科普核对）</h2>
+    <p class="hint">下列只作日常饲养提醒，不是病名清单，也不是投药建议。</p>
+    <div class="myth">
+      <strong>误区：人吃什么就给宠物吃一点</strong>
+      很多调味、葱蒜、巧克力、葡萄干等不适合猫犬。喂粮以正规宠物粮包装说明为准，零食另算。
+    </div>
+    <div class="myth">
+      <strong>误区：水脏了没关系，它自己会少喝</strong>
+      清水要勤换、碗要洗净。口渴却不愿喝脏水，是第一周最容易忽略的事。
+    </div>
+    <div class="myth">
+      <strong>误区：便便臭一点就先网上搜药</strong>
+      本页不做诊断。若持续异常或精神食欲变差，请就医，不要在短视频里对症买药。
+    </div>
+    <div class="myth">
+      <strong>误区：出门不牵绳「它很听话」</strong>
+      城市道路、电梯、小区绿化带都有突发情况。今日出门就先戴好牵绳或胸背带。
+    </div>
+  </section>
+
+  <section id="civil">
+    <h2>文明养宠轻提醒</h2>
+    <ul class="list">
+      <li>犬便随手捡拾；猫砂及时清理，减少异味与邻居矛盾。</li>
+      <li>公共区域牵绳，电梯与狭窄通道留意他人。</li>
+      <li>不随意投喂流浪动物大量人食；不确定时先查公开科普。</li>
+      <li>新环境少折腾：固定喂水喂粮位置，比频繁换花样更稳。</li>
+    </ul>
   </section>
 
   <section id="check">
     <h2>今日五项（没勾完不能保存）</h2>
-    <label class="item"><input type="checkbox" data-k="water" /> 喂水：碗已洗净并换上清水</label>
-    <label class="item"><input type="checkbox" data-k="food" /> 喂粮：按包装建议量投喂，不随意加人粮零食</label>
-    <label class="item"><input type="checkbox" data-k="clean" /> 清洁：猫砂/便便区域已清理，或犬便已捡拾</label>
-    <label class="item"><input type="checkbox" data-k="out" /> 出门：牵绳/胸背带已戴好（若今日出门）</label>
-    <label class="item"><input type="checkbox" data-k="bound" /> 边界自检：本页只做饲养核对，不在此看病开药</label>
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>今日进度</span>
+        <span id="progText">0 / 5</span>
+      </div>
+      <div class="bar" aria-hidden="true"><i id="progBar"></i></div>
+    </div>
+    <div class="row">
+      <input type="date" id="checkDate" aria-label="核对日期" />
+    </div>
+    <label class="item">
+      <input type="checkbox" data-k="water" />
+      <span>喂水：碗已洗净并换上清水
+        <span class="tip">碗底无残渣与油膜；水量够它随时喝。</span>
+      </span>
+    </label>
+    <label class="item">
+      <input type="checkbox" data-k="food" />
+      <span>喂粮：按包装建议量投喂，不随意加人粮零食
+        <span class="tip">换粮要缓慢过渡；本页不推荐具体品牌。</span>
+      </span>
+    </label>
+    <label class="item">
+      <input type="checkbox" data-k="clean" />
+      <span>清洁：猫砂/便便区域已清理，或犬便已捡拾
+        <span class="tip">出门带袋子；室内及时铲砂。</span>
+      </span>
+    </label>
+    <label class="item">
+      <input type="checkbox" data-k="out" />
+      <span>出门：牵绳/胸背带已戴好（若今日出门）
+        <span class="tip">今日不出门也可勾此项表示「已确认不出门」。</span>
+      </span>
+    </label>
+    <label class="item">
+      <input type="checkbox" data-k="bound" />
+      <span>边界自检：本页只做饲养核对，不在此看病开药
+        <span class="tip">异常情况请就医，不要在此对症。</span>
+      </span>
+    </label>
     <div class="row">
       <input type="text" id="petName" placeholder="宠物称呼（如：豆豆）" />
       <select id="petKind">
@@ -79,12 +249,20 @@
     <div class="row">
       <button type="button" id="saveCheck">保存今日核对</button>
       <button type="button" class="secondary" id="gotoBook">去预约试填</button>
+      <button type="button" class="ghost" id="resetChecks">清空勾选</button>
     </div>
     <div id="checkMsg" class="hint"></div>
   </section>
 
+  <section id="week">
+    <h2>七日进度（本机）</h2>
+    <p class="hint">点亮表示该日已有至少一条核对保存。以你本机记录为准，不是云端打卡。</p>
+    <div class="week" id="weekGrid" aria-label="近七日进度"></div>
+  </section>
+
   <section id="book">
     <h2>预约两周试填</h2>
+    <p class="hint">适合城市新手养宠人或家里一起养的人。同学群点赞不算一次试填。</p>
     <input type="text" id="who" placeholder="你的称呼" />
     <div class="row" style="margin-top:8px">
       <input type="tel" id="phone" placeholder="11位手机号" maxlength="11" />
@@ -102,58 +280,167 @@
     <div id="bookMsg" class="hint"></div>
   </section>
 
+  <section id="faq" class="faq">
+    <h2>常见问</h2>
+    <details>
+      <summary>记录会不会传到网上？</summary>
+      <p>不会。核对与预约都写在浏览器 localStorage，只在你这台设备、这个浏览器里。清站点数据后会消失。</p>
+    </details>
+    <details>
+      <summary>五项一定要全勾吗？</summary>
+      <p>要。未勾完时点保存会提示，避免「勾一半就算打卡」。今日不出门时，「出门」项可表示你已确认不出门。</p>
+    </details>
+    <details>
+      <summary>宠物生病了怎么办？</summary>
+      <p>请及时就医。本页不提供诊断、不开药、不推荐处方方案，也不卖药粮。</p>
+    </details>
+    <details>
+      <summary>换手机或清缓存后记录呢？</summary>
+      <p>本机记录不会自动同步。可用「复制摘要」先贴到备忘录，再在新设备重新勾选。</p>
+    </details>
+  </section>
+
   <section id="local">
     <h2>本机记录</h2>
+    <div class="row">
+      <button type="button" class="secondary" id="copySummary">复制摘要</button>
+      <button type="button" class="ghost" id="clearAll">清空本机记录</button>
+    </div>
+    <div id="localMsg" class="hint"></div>
     <div id="localList" class="hint">还没有记录。先勾完今日五项并保存。</div>
   </section>
 
   <footer>
-    学号 2024109002 · 吴奕璇 · 动物科学与医学学院<br />
+    学号 2024109002 · 吴奕璇 · 动物科学与医学学院 · 24动科3<br />
     公网地址：<a id="pageLink" href="https://hjw-create.github.io/wuyx-pet-mvp/">https://hjw-create.github.io/wuyx-pet-mvp/</a><br />
-    联系电话：18233520530 · 记录仅保存在本机浏览器，刷新仍在。
+    联系电话：18233520530 · 课程作业 MVP（路径B）· 仅饲养科普核对，非诊疗服务。
   </footer>
 </main>
 <script>
-const KEY = "wuyx_pet_mvp_v1";
-function load() {
-  try { return JSON.parse(localStorage.getItem(KEY) || '{"checks":[],"books":[]}'); }
-  catch { return { checks: [], books: [] }; }
+const KEY = "wuyx_pet_mvp_v2";
+const LEGACY = "wuyx_pet_mvp_v1";
+
+function todayStr() {
+  const d = new Date();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
 }
-function save(data) { localStorage.setItem(KEY, JSON.stringify(data)); }
+
+function load() {
+  try {
+    let raw = localStorage.getItem(KEY);
+    if (!raw) {
+      const old = localStorage.getItem(LEGACY);
+      if (old) {
+        const parsed = JSON.parse(old);
+        parsed.checks = (parsed.checks || []).map((c) => ({
+          ...c,
+          date: c.date || (c.time || "").slice(0, 10).replace(/\//g, "-") || todayStr(),
+        }));
+        save(parsed);
+        return parsed;
+      }
+    }
+    return JSON.parse(raw || '{"checks":[],"books":[]}');
+  } catch {
+    return { checks: [], books: [] };
+  }
+}
+
+function save(data) {
+  localStorage.setItem(KEY, JSON.stringify(data));
+}
+
+function boxes() {
+  return [...document.querySelectorAll("#check input[type=checkbox]")];
+}
+
+function updateProgress() {
+  const n = boxes().filter((b) => b.checked).length;
+  document.getElementById("progText").textContent = `${n} / 5`;
+  document.getElementById("progBar").style.width = `${(n / 5) * 100}%`;
+}
+
+function renderWeek() {
+  const data = load();
+  const grid = document.getElementById("weekGrid");
+  const done = new Set(
+    (data.checks || []).map((c) => c.date).filter(Boolean)
+  );
+  const labels = ["日", "一", "二", "三", "四", "五", "六"];
+  const today = todayStr();
+  let html = "";
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const key = `${y}-${m}-${day}`;
+    const cls = [
+      "day",
+      done.has(key) ? "done" : "",
+      key === today ? "today" : "",
+    ].filter(Boolean).join(" ");
+    html += `<button type="button" class="${cls}" data-date="${key}" title="${key}">${labels[d.getDay()]}<br>${Number(day)}</button>`;
+  }
+  grid.innerHTML = html;
+  grid.querySelectorAll("button.day").forEach((btn) => {
+    btn.onclick = () => {
+      document.getElementById("checkDate").value = btn.dataset.date;
+      document.getElementById("check").scrollIntoView({ behavior: "smooth" });
+    };
+  });
+}
+
 function render() {
   const data = load();
   const el = document.getElementById("localList");
   if (!data.checks.length && !data.books.length) {
     el.textContent = "还没有记录。先勾完今日五项并保存。";
+    renderWeek();
     return;
   }
   let html = "";
   if (data.checks.length) {
     html += "<strong>核对</strong><ul class='list'>";
-    data.checks.slice(-8).reverse().forEach(c => {
-      html += `<li>${c.time} · ${c.petKind || "未选类型"} ${c.petName || ""} · ${c.note || "无备注"}</li>`;
+    data.checks.slice(-12).reverse().forEach((c) => {
+      html += `<li>${c.date || ""} ${c.time || ""} · ${c.petKind || "未选类型"} ${c.petName || ""} · ${c.note || "无备注"}</li>`;
     });
     html += "</ul>";
   }
   if (data.books.length) {
     html += "<strong>预约</strong><ul class='list'>";
-    data.books.slice(-5).reverse().forEach(b => {
-      html += `<li>${b.time} · ${b.who} · ${b.phone.slice(0,3)}****${b.phone.slice(-4)} · ${b.how}</li>`;
+    data.books.slice(-5).reverse().forEach((b) => {
+      html += `<li>${b.time} · ${b.who} · ${b.phone.slice(0, 3)}****${b.phone.slice(-4)} · ${b.how}${b.oneThing ? " · " + b.oneThing : ""}</li>`;
     });
     html += "</ul>";
   }
   el.innerHTML = html;
+  renderWeek();
 }
+
+document.getElementById("checkDate").value = todayStr();
+boxes().forEach((b) => b.addEventListener("change", updateProgress));
+updateProgress();
+
+document.getElementById("resetChecks").onclick = () => {
+  boxes().forEach((b) => { b.checked = false; });
+  updateProgress();
+  document.getElementById("checkMsg").textContent = "";
+};
+
 document.getElementById("saveCheck").onclick = () => {
-  const boxes = [...document.querySelectorAll("#check input[type=checkbox]")];
   const msg = document.getElementById("checkMsg");
-  if (!boxes.every(b => b.checked)) {
+  if (!boxes().every((b) => b.checked)) {
     msg.className = "err";
     msg.textContent = "五项都勾完才能保存。";
     return;
   }
   const petName = document.getElementById("petName").value.trim();
   const petKind = document.getElementById("petKind").value;
+  const date = document.getElementById("checkDate").value || todayStr();
   if (!petKind) {
     msg.className = "err";
     msg.textContent = "请先选择宠物类型。";
@@ -161,15 +448,18 @@ document.getElementById("saveCheck").onclick = () => {
   }
   const data = load();
   data.checks.push({
+    date,
     time: new Date().toLocaleString("zh-CN", { hour12: false }),
-    petName, petKind,
-    note: document.getElementById("note").value.trim()
+    petName,
+    petKind,
+    note: document.getElementById("note").value.trim(),
   });
   save(data);
   msg.className = "ok";
-  msg.textContent = "已保存到本机。刷新后仍能在下方看到。";
+  msg.textContent = "已保存到本机。七日进度与下方列表会更新。";
   render();
 };
+
 document.getElementById("saveBook").onclick = () => {
   const who = document.getElementById("who").value.trim();
   const phone = document.getElementById("phone").value.trim();
@@ -189,16 +479,51 @@ document.getElementById("saveBook").onclick = () => {
   const data = load();
   data.books.push({
     time: new Date().toLocaleString("zh-CN", { hour12: false }),
-    who, phone, how, oneThing
+    who,
+    phone,
+    how,
+    oneThing,
   });
   save(data);
   msg.className = "ok";
   msg.textContent = "预约已记在本机，周末会按称呼联系试填。";
   render();
 };
+
 document.getElementById("gotoBook").onclick = () => {
   document.getElementById("book").scrollIntoView({ behavior: "smooth" });
 };
+
+document.getElementById("copySummary").onclick = async () => {
+  const data = load();
+  const lines = ["养宠第一周核对摘要（本机）"];
+  (data.checks || []).slice(-12).forEach((c) => {
+    lines.push(`核对 ${c.date || ""} ${c.time || ""} | ${c.petKind || ""} ${c.petName || ""} | ${c.note || ""}`);
+  });
+  (data.books || []).slice(-5).forEach((b) => {
+    lines.push(`预约 ${b.time} | ${b.who} | ${b.how} | ${b.oneThing || ""}`);
+  });
+  const text = lines.join("\n");
+  const msg = document.getElementById("localMsg");
+  try {
+    await navigator.clipboard.writeText(text);
+    msg.className = "ok";
+    msg.textContent = "摘要已复制。";
+  } catch {
+    msg.className = "err";
+    msg.textContent = "复制失败，请手动选择下方文字。";
+    document.getElementById("localList").textContent = text;
+  }
+};
+
+document.getElementById("clearAll").onclick = () => {
+  if (!confirm("确定清空本机全部核对与预约记录？")) return;
+  save({ checks: [], books: [] });
+  document.getElementById("localMsg").className = "ok";
+  document.getElementById("localMsg").textContent = "已清空。";
+  render();
+};
+
 render();
 </script>
 </body>
