@@ -17,9 +17,58 @@
     color:var(--ink);
     background:linear-gradient(180deg,#eef5ef,#f7f4ef 40%,#f4f7f4);
   }
-  main { max-width:720px; margin:0 auto; padding:20px 16px 56px; }
+  main { max-width:720px; margin:0 auto; padding:0 16px 56px; }
+  .hero {
+    margin:0 -16px 18px; padding:22px 16px 18px;
+    background:linear-gradient(135deg,#1f4d32 0%,#2f6b45 55%,#4a7c59 100%);
+    color:#f3faf5;
+  }
+  .hero .badge {
+    display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
+    background:#f0c36a; color:#3a2a0a; border-radius:6px; padding:3px 8px; margin-bottom:10px;
+  }
+  .hero h1 { font-size:1.6rem; line-height:1.35; margin:0 0 8px; color:#fff; }
+  .hero .sub { color:#d7eadc; margin:0 0 10px; line-height:1.55; }
+  .hero .cta-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .hero .cta-row a {
+    display:inline-block; text-decoration:none; font-size:.9rem; font-weight:600;
+    background:#fff; color:#1f4d32; border-radius:8px; padding:10px 14px;
+  }
+  .hero .cta-row a.ghost {
+    background:transparent; color:#fff; border:1px solid rgba(255,255,255,.45);
+  }
   h1 { font-size:1.55rem; line-height:1.35; margin:0 0 8px; }
   .sub { color:#45604c; margin:0 0 14px; line-height:1.55; }
+  .timeline {
+    display:grid; gap:8px; margin-top:8px;
+  }
+  .timeline .slot {
+    display:grid; grid-template-columns:72px 1fr; gap:10px;
+    background:#f7faf7; border:1px solid var(--line); border-radius:10px; padding:10px 12px;
+    font-size:.9rem; line-height:1.45;
+  }
+  .timeline .slot b { color:var(--acc); }
+  .quick {
+    display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;
+  }
+  @media (max-width:520px) { .quick { grid-template-columns:1fr; } }
+  .quick .box {
+    border:1px solid var(--line); border-radius:10px; padding:10px 12px; background:#fbfdfb;
+  }
+  .quick .box h3 { margin:0 0 8px; font-size:.95rem; }
+  .quick label {
+    display:flex; gap:8px; align-items:flex-start; font-size:.88rem;
+    padding:4px 0; line-height:1.4;
+  }
+  .stat-row {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 14px;
+  }
+  .stat {
+    background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px;
+    text-align:center;
+  }
+  .stat b { display:block; font-size:1.25rem; color:var(--acc); }
+  .stat span { font-size:.75rem; color:var(--muted); }
   .bound {
     background:#fff8ef; border:1px solid #e6d2b5; border-radius:10px;
     padding:12px 14px; margin:0 0 14px; font-size:.92rem; line-height:1.55;
@@ -114,8 +163,21 @@
 </head>
 <body>
 <main>
-  <h1>养宠第一周，先勾这几项</h1>
-  <p class="sub">给城市新手养宠人用的七日饲养核对单：把喂水、喂粮、清洁、出门牵绳和文明养宠几件事勾清楚。对照公开科普，不做诊断、不开药、不卖宠物药粮。</p>
+  <header class="hero">
+    <div class="badge">V2 加厚版 · 2026-10-20</div>
+    <h1>养宠第一周，先勾这几项</h1>
+    <p class="sub">城市新手养宠七日核对：喂水、喂粮、清洁、出门牵绳、文明养宠。本页已加厚——含误区科普、早晚速勾、到家时间线、七日进度与本机记录。</p>
+    <div class="cta-row">
+      <a href="#check">立刻勾今日五项</a>
+      <a class="ghost" href="#myths">先看常见误区</a>
+    </div>
+  </header>
+
+  <div class="stat-row" aria-label="本机统计">
+    <div class="stat"><b id="statChecks">0</b><span>已存核对</span></div>
+    <div class="stat"><b id="statDays">0</b><span>点亮天数</span></div>
+    <div class="stat"><b id="statBooks">0</b><span>预约条数</span></div>
+  </div>
 
   <div class="bound">
     <strong>边界（请先看完）：</strong>
@@ -127,11 +189,11 @@
   </div>
 
   <nav class="jump" aria-label="页面跳转">
-    <a href="#why">为什么</a>
-    <a href="#steps">三步</a>
+    <a href="#check">今日五项</a>
+    <a href="#quick">早晚速勾</a>
+    <a href="#timeline">到家七日</a>
     <a href="#myths">常见误区</a>
     <a href="#civil">文明养宠</a>
-    <a href="#check">今日五项</a>
     <a href="#week">七日进度</a>
     <a href="#book">预约试填</a>
     <a href="#faq">常见问</a>
@@ -157,10 +219,47 @@
     <h2>三步用法</h2>
     <ol class="steps">
       <li>勾完「今日五项」并保存到本机（可顺便写一句观察）。</li>
-      <li>在「七日进度」里看本周哪几天已经记过。</li>
+      <li>用「早晚速勾」补碎事；在「七日进度」看哪天记过。</li>
       <li>愿意试填两周可留下称呼和手机，周末联系。</li>
     </ol>
     <p class="hint">数据只存在你当前浏览器的本机存储里，不会上传到服务器。</p>
+  </section>
+
+  <section id="timeline">
+    <h2>到家七日时间线（对照用）</h2>
+    <p class="hint">不是打卡强制，只帮你按天数想起该核对什么。仍不做诊疗。</p>
+    <div class="timeline">
+      <div class="slot"><b>第1天</b><span>固定喂水喂粮位置；少换花样；确认紧急就医路线（附近宠物医院名即可）。</span></div>
+      <div class="slot"><b>第2-3天</b><span>观察精神与食欲是否大致稳定；清洁区是否每天清得动。</span></div>
+      <div class="slot"><b>第4-5天</b><span>若出门：牵绳/胸背带是否合身；电梯与小区绿化带文明捡便。</span></div>
+      <div class="slot"><b>第6-7天</b><span>回顾本周漏勾项；决定是否预约两周试填，把真实原话留下。</span></div>
+    </div>
+  </section>
+
+  <section id="quick">
+    <h2>早晚速勾（可选，不进五项拦截）</h2>
+    <p class="hint">勾完只会记在本机「速勾」里，方便碎事提醒；正式打卡请用下方「今日五项」。</p>
+    <div class="quick">
+      <div class="box">
+        <h3>早晨</h3>
+        <label><input type="checkbox" data-q="m1" /> 换清水</label>
+        <label><input type="checkbox" data-q="m2" /> 按量喂早粮</label>
+        <label><input type="checkbox" data-q="m3" /> 看一眼精神/食欲（非诊断）</label>
+        <label><input type="checkbox" data-q="m4" /> 铲砂或准备出门捡便袋</label>
+      </div>
+      <div class="box">
+        <h3>晚上</h3>
+        <label><input type="checkbox" data-q="e1" /> 再换一次清水</label>
+        <label><input type="checkbox" data-q="e2" /> 清理活动区地面毛发/碎屑</label>
+        <label><input type="checkbox" data-q="e3" /> 确认门窗/阳台安全</label>
+        <label><input type="checkbox" data-q="e4" /> 写一句今日观察（可到五项区粘贴）</label>
+      </div>
+    </div>
+    <div class="row">
+      <button type="button" class="secondary" id="saveQuick">保存今日速勾</button>
+      <button type="button" class="ghost" id="clearQuick">清空速勾勾选</button>
+    </div>
+    <div id="quickMsg" class="hint"></div>
   </section>
 
   <section id="myths">
@@ -320,6 +419,10 @@
 const KEY = "wuyx_pet_mvp_v2";
 const LEGACY = "wuyx_pet_mvp_v1";
 
+function emptyData() {
+  return { checks: [], books: [], quicks: [] };
+}
+
 function todayStr() {
   const d = new Date();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -338,13 +441,18 @@ function load() {
           ...c,
           date: c.date || (c.time || "").slice(0, 10).replace(/\//g, "-") || todayStr(),
         }));
+        parsed.quicks = parsed.quicks || [];
         save(parsed);
         return parsed;
       }
     }
-    return JSON.parse(raw || '{"checks":[],"books":[]}');
+    const data = JSON.parse(raw || '{"checks":[],"books":[],"quicks":[]}');
+    data.checks = data.checks || [];
+    data.books = data.books || [];
+    data.quicks = data.quicks || [];
+    return data;
   } catch {
-    return { checks: [], books: [] };
+    return emptyData();
   }
 }
 
@@ -394,10 +502,18 @@ function renderWeek() {
   });
 }
 
+function updateStats(data) {
+  const days = new Set((data.checks || []).map((c) => c.date).filter(Boolean));
+  document.getElementById("statChecks").textContent = String((data.checks || []).length);
+  document.getElementById("statDays").textContent = String(days.size);
+  document.getElementById("statBooks").textContent = String((data.books || []).length);
+}
+
 function render() {
   const data = load();
+  updateStats(data);
   const el = document.getElementById("localList");
-  if (!data.checks.length && !data.books.length) {
+  if (!data.checks.length && !data.books.length && !data.quicks.length) {
     el.textContent = "还没有记录。先勾完今日五项并保存。";
     renderWeek();
     return;
@@ -407,6 +523,13 @@ function render() {
     html += "<strong>核对</strong><ul class='list'>";
     data.checks.slice(-12).reverse().forEach((c) => {
       html += `<li>${c.date || ""} ${c.time || ""} · ${c.petKind || "未选类型"} ${c.petName || ""} · ${c.note || "无备注"}</li>`;
+    });
+    html += "</ul>";
+  }
+  if (data.quicks.length) {
+    html += "<strong>早晚速勾</strong><ul class='list'>";
+    data.quicks.slice(-8).reverse().forEach((q) => {
+      html += `<li>${q.date} ${q.time} · 早${q.morning}/4 · 晚${q.evening}/4</li>`;
     });
     html += "</ul>";
   }
@@ -494,6 +617,33 @@ document.getElementById("gotoBook").onclick = () => {
   document.getElementById("book").scrollIntoView({ behavior: "smooth" });
 };
 
+document.getElementById("saveQuick").onclick = () => {
+  const morning = [...document.querySelectorAll('#quick input[data-q^="m"]')].filter((b) => b.checked).length;
+  const evening = [...document.querySelectorAll('#quick input[data-q^="e"]')].filter((b) => b.checked).length;
+  const msg = document.getElementById("quickMsg");
+  if (morning + evening === 0) {
+    msg.className = "err";
+    msg.textContent = "至少勾一项再保存。";
+    return;
+  }
+  const data = load();
+  data.quicks.push({
+    date: todayStr(),
+    time: new Date().toLocaleString("zh-CN", { hour12: false }),
+    morning,
+    evening,
+  });
+  save(data);
+  msg.className = "ok";
+  msg.textContent = `已保存速勾：早 ${morning}/4，晚 ${evening}/4。正式打卡请用「今日五项」。`;
+  render();
+};
+
+document.getElementById("clearQuick").onclick = () => {
+  document.querySelectorAll("#quick input[type=checkbox]").forEach((b) => { b.checked = false; });
+  document.getElementById("quickMsg").textContent = "";
+};
+
 document.getElementById("copySummary").onclick = async () => {
   const data = load();
   const lines = ["养宠第一周核对摘要（本机）"];
@@ -517,8 +667,8 @@ document.getElementById("copySummary").onclick = async () => {
 };
 
 document.getElementById("clearAll").onclick = () => {
-  if (!confirm("确定清空本机全部核对与预约记录？")) return;
-  save({ checks: [], books: [] });
+  if (!confirm("确定清空本机全部核对、速勾与预约记录？")) return;
+  save(emptyData());
   document.getElementById("localMsg").className = "ok";
   document.getElementById("localMsg").textContent = "已清空。";
   render();
